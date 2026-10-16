@@ -1,0 +1,6 @@
+$ cd automation && mvn test -Dcucumber.features=src/test/resources/features/02_login.feature
+
+java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebElement.clear()" because "this.usernameInput" is null
+	at com.liverpool.playground.pages.LoginPage.enterUsername(LoginPage.java:36)
+	at com.liverpool.playground.steps.LoginSteps.capturaCredenciales(LoginSteps.java:34)
+	at ✽.captura el usuario "qa.senior" y la contraseña "Liverpool123"(file://automation/src/test/resources/features/02_login.feature:6)

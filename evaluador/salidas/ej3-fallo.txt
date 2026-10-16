@@ -1,0 +1,8 @@
+$ cd automation && mvn test -Dcucumber.features=src/test/resources/features/03_seleccion_pedido.feature
+
+org.openqa.selenium.StaleElementReferenceException: 
+stale element reference: stale element not found
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Element: [[ChromeDriver: chrome on mac (1e386890551d762bfe86f0c6781a9690)] -> css selector: tr[data-id='1002']]
+	at com.liverpool.playground.pages.PedidosTablePage.clickRowAfterRefresh(PedidosTablePage.java:27)
+	at ✽.recarga la página y selecciona el pedido "1002"(file://automation/src/test/resources/features/03_seleccion_pedido.feature:7)

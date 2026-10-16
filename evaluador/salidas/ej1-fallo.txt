@@ -1,0 +1,10 @@
+$ cd automation && mvn test -Dcucumber.features=src/test/resources/features/01_envio_pedido.feature
+
+java.lang.AssertionError: 
+[Tiempo hasta el clic (ms)] 
+Expecting actual:
+  5243L
+to be less than:
+  4500L 
+	at com.liverpool.playground.steps.PedidoFormSteps.envioEnTiempoRazonable(PedidoFormSteps.java:52)
+	at ✽.el envío se realizó en un tiempo razonable(file://automation/src/test/resources/features/01_envio_pedido.feature:10)

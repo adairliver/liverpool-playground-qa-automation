@@ -5,7 +5,9 @@ Reto en vivo de 30 minutos para QA Automation Senior. Este repositorio contiene:
 - `app-web/` — app de pedidos en React (Vite), con datos simulados en el frontend (sin backend).
 - `automation/` — suite Selenium 4 + Cucumber (Gherkin) + JUnit 5, Java 17, Maven.
 - `docs/tickets/` — 5 tickets de intake estilo Jira (síntomas, sin causa raíz).
-- `docs/banco-de-errores.md` — guía del entrevistador (**no compartir con el candidato**).
+- `evaluador/` — **kit del evaluador** (**no compartir con el candidato**): guía completa en `evaluador/README.md`, soluciones,
+  script de progreso y video de la app al 100 %.
+- `docs/banco-de-errores.md` — índice de los 5 defectos (**no compartir con el candidato**; el detalle está en la guía).
 - `openspec/` — especificaciones (OpenSpec). El spec original está en `spec_qa_automation_playground.md`.
 
 ## Ramas

@@ -1,0 +1,17 @@
+diff --git a/automation/src/main/java/com/liverpool/playground/pages/PedidosTablePage.java b/automation/src/main/java/com/liverpool/playground/pages/PedidosTablePage.java
+index 0ebb19d..d5731a3 100644
+--- a/automation/src/main/java/com/liverpool/playground/pages/PedidosTablePage.java
++++ b/automation/src/main/java/com/liverpool/playground/pages/PedidosTablePage.java
+@@ -20,10 +20,10 @@ public class PedidosTablePage {
+         waitForRow("1001");
+     }
+ 
+-    /** Recarga la página y selecciona el pedido indicado. */
++    /** Ejercicio 3: la fila se localiza DESPUÉS del refresh() para evitar StaleElementReferenceException. */
+     public void clickRowAfterRefresh(String pedidoId) {
+-        WebElement rowItem = waitForRow(pedidoId);
+         driver.navigate().refresh();
++        WebElement rowItem = waitForRow(pedidoId);
+         rowItem.click();
+     }
+ 

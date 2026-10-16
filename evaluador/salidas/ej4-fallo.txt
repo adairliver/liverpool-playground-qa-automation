@@ -1,0 +1,8 @@
+$ cd automation && mvn test -Dcucumber.features=src/test/resources/features/04_reporte.feature
+
+org.opentest4j.AssertionFailedError: 
+
+expected: "Reporte de Pedidos"
+ but was: "Dashboard - Pedidos Playground"
+	at com.liverpool.playground.steps.ReportSteps.tituloEs(ReportSteps.java:40)
+	at ✽.el título es "Reporte de Pedidos"(file://automation/src/test/resources/features/04_reporte.feature:9)

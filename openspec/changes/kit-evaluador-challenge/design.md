@@ -30,7 +30,7 @@ Ver `proposal.md` para la motivación. Estado actual relevante:
 
 ### 1. Todo el material en `evaluador/`, nunca en la semilla
 
-Estructura: `evaluador/README.md` (guía), `evaluador/progreso.sh`, `evaluador/soluciones/ej{1..5}.patch`,
+Estructura: `evaluador/README.md` (guía), `evaluador/progreso.py`, `evaluador/soluciones/ej{1..5}.patch`,
 `evaluador/media/` (video y capturas), `evaluador/video/` (generador con Playwright, `node_modules` ignorado).
 `prepare-context.sh` excluye `evaluador` en `git archive` y verifica su ausencia (como ya hace con `infra`).
 *Alternativa:* una rama aparte para el material; descartada porque complica mantenerlo sincronizado con los defectos.
