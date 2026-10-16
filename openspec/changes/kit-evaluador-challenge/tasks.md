@@ -21,11 +21,11 @@
 
 ## 4. Script de progreso
 
-- [ ] 4.1 Implementar `evaluador/progreso.sh` con la tabla de ejercicios (feature, archivo y regla estática) y ejecución sobre copia temporal en otro puerto; verificar que no modifica el árbol del candidato (comparación de hashes antes y después)
-- [ ] 4.2 Implementar las reglas estáticas y el estado `PASA_SIN_TECNICA`; verificar con variantes incorrectas (p. ej. `Thread.sleep(3500)`, `try/catch` conservado) que no se marcan como `RESUELTO`
-- [ ] 4.3 Implementar la detección de cambios fuera de alcance contra el commit inicial y verificar que lista una edición a un `.feature` y no reporta nada si solo se tocan Page Objects
-- [ ] 4.4 Registrar el primer instante `RESUELTO` por ejercicio en `progreso.jsonl` y verificar que se conserva entre ejecuciones repetidas
-- [ ] 4.5 Probar el script de punta a punta: 0/5 sobre la rama sembrada, 1/5 … 5/5 aplicando los parches uno a uno, y ejecución simultánea con `mvn test` del candidato sin error de puerto
+- [x] 4.1 Implementar `evaluador/progreso.py` con la tabla de ejercicios (feature, archivo y regla estática) y ejecución sobre copia temporal en otro puerto; verificar que no modifica el árbol del candidato (comparación de hashes antes y después)
+- [x] 4.2 Implementar las reglas estáticas y el estado `PASA_SIN_TECNICA`; verificar con variantes incorrectas (p. ej. `Thread.sleep(3500)`, `try/catch` conservado) que no se marcan como `RESUELTO`
+- [x] 4.3 Implementar la detección de cambios fuera de alcance contra el commit inicial y verificar que lista una edición a un `.feature` y no reporta nada si solo se tocan Page Objects
+- [x] 4.4 Registrar el primer instante `RESUELTO` por ejercicio en `progreso.jsonl` y verificar que se conserva entre ejecuciones repetidas
+- [x] 4.5 Probar el script de punta a punta: 0/5 sobre la rama sembrada, 1/5 … 5/5 aplicando los parches uno a uno, y ejecución simultánea con `mvn test` del candidato sin error de puerto
 
 ## 5. Guía del evaluador
 
