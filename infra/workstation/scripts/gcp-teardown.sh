@@ -23,6 +23,7 @@ for r in qa-challenge-allow-internal qa-challenge-ws-ingress qa-challenge-ws-egr
 done
 g compute networks subnets delete "$SUBNET" --region "$REGION" --quiet || true
 g compute networks delete "$NETWORK" --quiet || true
+g iam service-accounts delete "${WS_SA_NAME:-qa-ws-sa}@$PROJECT.iam.gserviceaccount.com" --quiet || true
 read -r -p "¿Borrar tambien el repositorio de imagenes $REPO? [s/N] " d
 [ "$d" = "s" ] && g artifacts repositories delete "$REPO" --location "$REGION" --quiet || true
 echo "Listo."

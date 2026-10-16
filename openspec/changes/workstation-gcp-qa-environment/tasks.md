@@ -15,9 +15,9 @@
 ## 3. Google Cloud
 
 - [x] 3.1 Script `gcp-setup.sh` idempotente (APIs, Artifact Registry, red, clúster, configuración, workstation)
-- [ ] 3.2 Construir y publicar la imagen con Cloud Build
-- [ ] 3.3 Crear la infraestructura y la workstation
-- [ ] 3.4 Otorgar acceso IAM al usuario del reto
+- [x] 3.2 Construir y publicar la imagen con Cloud Build
+- [x] 3.3 Crear la infraestructura y la workstation
+- [x] 3.4 Otorgar acceso IAM al usuario del reto
 - [ ] 3.5 Verificar desde el navegador (IDE, autocompletado, sin IA, suite en verde)
 - [x] 3.6 Script `gcp-teardown.sh`
 

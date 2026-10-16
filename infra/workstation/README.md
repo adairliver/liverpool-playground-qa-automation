@@ -53,9 +53,7 @@ Valores por defecto (sobrescribibles con variables de entorno): proyecto `crp-po
 Dar acceso a un candidato (cuenta de Google) e iniciar la workstation:
 
 ```bash
-gcloud --project crp-poc-it-hackathon-1 workstations add-iam-policy-binding qa-challenge-ws \
-  --cluster qa-challenge-cluster --config qa-challenge-config --region us-central1 \
-  --member=user:CORREO --role=roles/workstations.user
+./scripts/grant-access.sh CORREO
 gcloud --project crp-poc-it-hackathon-1 workstations start qa-challenge-ws \
   --cluster qa-challenge-cluster --config qa-challenge-config --region us-central1
 ```
