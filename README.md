@@ -15,6 +15,18 @@ Reto en vivo de 30 minutos para QA Automation Senior. Este repositorio contiene:
 | `development` | Suite funcionando al 100% (línea base). |
 | `challenge-30mins` | Misma suite con los 5 defectos sembrados para el candidato (Fase 2). |
 
+## Look and feel
+
+La app imita a liverpool.com.mx (solo colores y tipografía, **sin logos ni imágenes de la marca**; es un sitio de demostración):
+
+- Paleta del tema público de Liverpool (rosa `#E10098`, grises, estados) en `app-web/src/styles/tokens.css`.
+- Tipografía **Roboto** e íconos Material, empaquetados localmente (no requiere internet).
+- Header de dos niveles, barra de anuncio y footer con la estructura de Liverpool; login con el patrón del login/registro de Liverpool.
+- Pedidos como "Mis compras" (breadcrumb, estatus con color, fila completa seleccionable).
+- Los controles decorativos (buscador, Categorías, favoritos, bolsa, filtros, enlaces del footer) no hacen nada a propósito.
+
+Regla: los IDs, los `data-id`, los títulos de pestaña y los tiempos simulados no se tocan al cambiar estilos; la suite debe seguir en verde sin editar Java.
+
 ## Prerrequisitos
 
 Node.js 18+ (probado con 20), npm, JDK 17+, Maven 3.9+ y Google Chrome. Selenium Manager descarga el chromedriver solo.

@@ -4,8 +4,8 @@ import DashboardPage from './pages/DashboardPage.jsx';
 import PedidoFormPage from './pages/PedidoFormPage.jsx';
 import PedidosPage from './pages/PedidosPage.jsx';
 import ReportePage from './pages/ReportePage.jsx';
+import { isLoggedIn } from './session.js';
 
-export const isLoggedIn = () => sessionStorage.getItem('session') === 'ok';
 
 // Cada navegacion es una carga de pagina completa (enlaces <a href>), sin router externo.
 export default function App() {
