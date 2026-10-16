@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Puerto fijo por defecto: la suite de automatizacion apunta a http://localhost:5199.
-// El evaluador puede levantar otra instancia en paralelo con PORT=5299 (ver evaluador/progreso.sh).
+// Puerto por defecto: la suite de automatizacion apunta a http://localhost:5199.
+// Se puede cambiar con la variable de entorno PORT.
 const port = Number(process.env.PORT) || 5199;
 
 export default defineConfig({
