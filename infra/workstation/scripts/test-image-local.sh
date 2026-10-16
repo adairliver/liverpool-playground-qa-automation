@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Verifica la imagen construida localmente (qa-ws:local) con las mismas garantias que se exigen en la workstation.
-#   ./scripts/test-image-local.sh [imagen]
+#   ./scripts/test-image-local.sh [imagen]        (EXPECT=red si la imagen es de la rama del reto: suite sembrada fallando)
 set -uo pipefail
 IMG="${1:-qa-ws:local}"
 export DOCKER_CONFIG="${DOCKER_CONFIG:-/tmp/dockercfg}"
@@ -31,8 +31,14 @@ echo "4) Suite verde SIN red (dependencias offline)"
 out="$(docker run --rm --platform linux/amd64 --network none --entrypoint bash "$IMG" -lc \
    "cp -r /opt/qa-seed/project /tmp/p && cd /tmp/p/automation && mvn -B -o test 2>&1")"
 echo "$out" | grep -E "Tests run:.*Fail|BUILD" | tail -3
-echo "$out" | grep -q "Tests run: 6, Failures: 0, Errors: 0" && echo "$out" | grep -q "BUILD SUCCESS" \
-  && ok "6/6 escenarios en verde sin red" || bad "la suite no paso offline"
+if [ "${EXPECT:-green}" = "red" ]; then
+  # Imagen del reto: la suite sembrada debe correr sin red y fallar exactamente en los 5 escenarios con defecto.
+  echo "$out" | grep -q "Tests run: 6, Failures: 3, Errors: 2" && ! echo "$out" | grep -qE "Could not resolve|Cannot access|PluginResolution" \
+    && ok "suite sembrada: 5 de 6 escenarios fallan, sin errores de dependencias offline" || bad "la suite sembrada no se comporta como se espera"
+else
+  echo "$out" | grep -q "Tests run: 6, Failures: 0, Errors: 0" && echo "$out" | grep -q "BUILD SUCCESS" \
+    && ok "6/6 escenarios en verde sin red" || bad "la suite no paso offline"
+fi
 echo "$out" | grep -q "??" && bad "la consola no es UTF-8 (acentos rotos)" || ok "acentos legibles (UTF-8)"
 
 echo "5) Arranque real del IDE (entrypoint original) + servidor de lenguaje Java"

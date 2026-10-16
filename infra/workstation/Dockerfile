@@ -42,7 +42,9 @@ RUN set -eux; \
     export JAVA_HOME=/opt/jdk17 PATH=/opt/jdk17/bin:/opt/maven/bin:$PATH; \
     cd /opt/qa-seed/project/app-web && npm ci --no-audit --no-fund; \
     cd /opt/qa-seed/project/automation; \
-    mvn -B -Dmaven.repo.local=/opt/m2/repository clean test; \
+    # Calienta dependencias ejecutando la suite. Si el proyecto trae pruebas fallando a proposito (rama del reto),
+    # los fallos de pruebas no deben romper la imagen; los errores de compilacion o de resolucion si.
+    mvn -B -Dmaven.repo.local=/opt/m2/repository -Dmaven.test.failure.ignore=true clean test; \
     # El IDE (m2e) calcula el plan completo del ciclo de vida: resolver tambien jar/install/deploy/clean offline. \
     mvn -B -Dmaven.repo.local=/opt/m2/repository dependency:resolve-plugins dependency:resolve; \
     rm -rf /opt/qa-seed/project/automation/target; \
