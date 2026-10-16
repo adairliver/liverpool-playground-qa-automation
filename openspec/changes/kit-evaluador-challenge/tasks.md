@@ -13,11 +13,11 @@
 
 ## 3. Rama del reto y soluciones de referencia
 
-- [ ] 3.1 Crear `challenge-30mins` desde `development` y sembrar los 5 defectos (un método por Page Object) y verificar con `git diff development --stat` que solo cambian los cinco Page Objects
-- [ ] 3.2 Ejecutar la suite sembrada y verificar que fallan los escenarios de los cinco ejercicios con las señales descritas en el banco de errores, guardando la salida real de cada uno
-- [ ] 3.3 Generar `evaluador/soluciones/ej1.patch` … `ej5.patch` y verificar que cada parche se aplica solo sobre una copia limpia y mueve únicamente su escenario a verde
-- [ ] 3.4 Aplicar los cinco parches en una copia y verificar que la suite queda 6/6 en verde
-- [ ] 3.5 Revisar que los tickets QA-101 a QA-105 describen síntoma y no causa raíz, verificando con una lectura cruzada contra el banco de errores
+- [x] 3.1 Crear `challenge-30mins` desde `development` y sembrar los 5 defectos (un método por Page Object) y verificar con `git diff development --stat` que solo cambian los cinco Page Objects
+- [x] 3.2 Ejecutar la suite sembrada y verificar que fallan los escenarios de los cinco ejercicios con las señales descritas en el banco de errores, guardando la salida real de cada uno
+- [x] 3.3 Generar `evaluador/soluciones/ej1.patch` … `ej5.patch` y verificar que cada parche se aplica solo sobre una copia limpia y mueve únicamente su escenario a verde
+- [x] 3.4 Aplicar los cinco parches en una copia y verificar que la suite queda 6/6 en verde
+- [x] 3.5 Revisar que los tickets QA-101 a QA-105 describen síntoma y no causa raíz, verificando con una lectura cruzada contra el banco de errores
 
 ## 4. Script de progreso
 

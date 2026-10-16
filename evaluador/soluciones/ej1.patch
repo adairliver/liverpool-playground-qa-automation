@@ -1,0 +1,23 @@
+diff --git a/automation/src/main/java/com/liverpool/playground/pages/PedidoFormPage.java b/automation/src/main/java/com/liverpool/playground/pages/PedidoFormPage.java
+index 3edb8be..f203f6c 100644
+--- a/automation/src/main/java/com/liverpool/playground/pages/PedidoFormPage.java
++++ b/automation/src/main/java/com/liverpool/playground/pages/PedidoFormPage.java
+@@ -43,14 +43,11 @@ public class PedidoFormPage {
+         cantidadInput.sendKeys(cantidad);
+     }
+ 
+-    /** Envía el formulario. */
++    /** Ejercicio 1: espera explícita (WebDriverWait + ExpectedConditions), nunca Thread.sleep. */
+     public void clickSubmitButton() {
+-        try {
+-            Thread.sleep(5000);
+-        } catch (InterruptedException e) {
+-            Thread.currentThread().interrupt();
+-        }
+-        submitButton.click();
++        new WebDriverWait(driver, Duration.ofSeconds(10))
++                .until(ExpectedConditions.elementToBeClickable(submitButton))
++                .click();
+     }
+ 
+     public String confirmationMessage() {

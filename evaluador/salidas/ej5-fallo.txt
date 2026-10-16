@@ -1,0 +1,7 @@
+$ cd automation && mvn test -Dcucumber.features=src/test/resources/features/05_banner_promocional.feature
+
+java.lang.AssertionError: 
+[NoSuchElementException registradas durante la consulta] 
+Expecting empty but was: [org.openqa.selenium.NoSuchElementException]
+	at com.liverpool.playground.steps.PromoBannerSteps.sinExcepciones(PromoBannerSteps.java:49)
+	at ✽.la consulta no dejó errores registrados(file://automation/src/test/resources/features/05_banner_promocional.feature:9)
