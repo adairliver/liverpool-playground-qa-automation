@@ -36,6 +36,6 @@
 
 ## 6. Publicación
 
-- [ ] 6.1 Reconstruir la imagen con `BRANCH=challenge-30mins` y verificar con `test-image-local.sh` que la semilla no contiene `evaluador/` ni referencias a los defectos
+- [x] 6.1 Reconstruir la imagen con `BRANCH=challenge-30mins` y verificar con `test-image-local.sh` que la semilla no contiene `evaluador/` ni referencias a los defectos
 - [ ] 6.2 Actualizar la configuración de la workstation y recrearla; verificar en el navegador que la suite sembrada falla 5 de 5 y que el evaluador puede ejecutar el script desde su propia sesión
 - [ ] 6.3 Ejecutar `openspec validate kit-evaluador-challenge --strict` y subir los cambios al repositorio
