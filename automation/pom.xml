@@ -18,6 +18,12 @@
     <junit.version>5.11.3</junit.version>
     <assertj.version>3.26.3</assertj.version>
     <surefire.version>3.5.2</surefire.version>
+    <maven-plugins.resources>3.4.0</maven-plugins.resources>
+    <maven-plugins.compiler>3.14.0</maven-plugins.compiler>
+    <maven-plugins.jar>3.4.2</maven-plugins.jar>
+    <maven-plugins.install>3.1.4</maven-plugins.install>
+    <maven-plugins.deploy>3.1.4</maven-plugins.deploy>
+    <maven-plugins.clean>3.4.1</maven-plugins.clean>
   </properties>
 
   <dependencyManagement>
@@ -75,6 +81,17 @@
   </dependencies>
 
   <build>
+    <!-- Versiones fijas: el IDE (m2e) y la linea de comandos resuelven exactamente los mismos plugins. -->
+    <pluginManagement>
+      <plugins>
+        <plugin><artifactId>maven-clean-plugin</artifactId><version>${maven-plugins.clean}</version></plugin>
+        <plugin><artifactId>maven-resources-plugin</artifactId><version>${maven-plugins.resources}</version></plugin>
+        <plugin><artifactId>maven-compiler-plugin</artifactId><version>${maven-plugins.compiler}</version></plugin>
+        <plugin><artifactId>maven-jar-plugin</artifactId><version>${maven-plugins.jar}</version></plugin>
+        <plugin><artifactId>maven-install-plugin</artifactId><version>${maven-plugins.install}</version></plugin>
+        <plugin><artifactId>maven-deploy-plugin</artifactId><version>${maven-plugins.deploy}</version></plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
