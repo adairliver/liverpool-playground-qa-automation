@@ -81,10 +81,10 @@ def regla_1(src):
 def regla_2(src):
     if "@FindBy" not in src:
         return True, "sin @FindBy (localiza con driver.findElement)"
-    c = con_llamados(src, "LoginPage")
-    if c and "initElements(" in c:
-        return True, "PageFactory.initElements en el constructor"
-    return False, "los @FindBy no se inicializan (falta PageFactory.initElements en el constructor)"
+    # Los @FindBy son proxies perezosos: initElements en el constructor, en open() o donde sea antes de usarlos es valido.
+    if "initElements(" in src:
+        return True, "PageFactory.initElements"
+    return False, "los @FindBy no se inicializan (falta PageFactory.initElements)"
 
 
 def regla_3(src):

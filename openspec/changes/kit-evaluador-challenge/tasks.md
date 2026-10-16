@@ -29,10 +29,10 @@
 
 ## 5. Guía del evaluador
 
-- [ ] 5.1 Escribir `evaluador/README.md` con objetivo, formato, arquitectura (diagrama ASCII y mapa ejercicio → feature → ticket → método) y temas del reto
-- [ ] 5.2 Documentar cada ejercicio con comando de reproducción, salida real de fallo, causa raíz, solución (diff), errores típicos, preguntas de seguimiento y tres niveles de pista; verificar ejecutando cada comando de la guía
-- [ ] 5.3 Añadir la rúbrica, las preguntas frecuentes del candidato, el uso del script de progreso y el estado final esperado con el video y las capturas
-- [ ] 5.4 Enlazar la guía desde el `README.md` principal y consolidar el banco de errores en ella (sin dejar duplicados contradictorios)
+- [x] 5.1 Escribir `evaluador/README.md` con objetivo, formato, arquitectura (diagrama ASCII y mapa ejercicio → feature → ticket → método) y temas del reto
+- [x] 5.2 Documentar cada ejercicio con comando de reproducción, salida real de fallo, causa raíz, solución (diff), errores típicos, preguntas de seguimiento y tres niveles de pista; verificar ejecutando cada comando de la guía
+- [x] 5.3 Añadir la rúbrica, las preguntas frecuentes del candidato, el uso del script de progreso y el estado final esperado con el video y las capturas
+- [x] 5.4 Enlazar la guía desde el `README.md` principal y consolidar el banco de errores en ella (sin dejar duplicados contradictorios)
 
 ## 6. Publicación
 
