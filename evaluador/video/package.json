@@ -1,0 +1,14 @@
+{
+  "name": "evaluador-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Genera el video de referencia (estado al 100%) de la app de pedidos. Solo para el evaluador.",
+  "type": "module",
+  "scripts": {
+    "grabar": "node grabar.mjs"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "playwright": "1.49.1"
+  }
+}

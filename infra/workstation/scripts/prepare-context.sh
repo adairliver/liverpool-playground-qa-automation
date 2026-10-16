@@ -10,19 +10,13 @@ OUT="$HERE/.build"
 
 rm -rf "$OUT" && mkdir -p "$OUT/seed"
 # Las exclusiones se aplican en git archive para que esos archivos ni siquiera se extraigan.
-git -C "$REPO" archive "$BRANCH" -- . ':!openspec' ':!.cursor' ':!infra' \
+git -C "$REPO" archive "$BRANCH" -- . ':!openspec' ':!.cursor' ':!infra' ':!evaluador' \
     ':!docs/banco-de-errores.md' ':!spec_qa_automation_playground.md' | tar -x -C "$OUT/seed"
-
-# Comprobacion: nada de lo excluido debe haber llegado a la semilla
-for f in openspec .cursor infra docs/banco-de-errores.md spec_qa_automation_playground.md; do
-  [ ! -e "$OUT/seed/$f" ] || { echo "ERROR: $f llego a la semilla" >&2; exit 1; }
-done
 
 # README propio del candidato (el del repositorio menciona el banco de errores y la rama del reto)
 cp "$HERE/config/candidate-README.md" "$OUT/seed/README.md"
-if grep -qiE 'banco-de-errores|challenge-30mins|sembrad' "$OUT/seed/README.md"; then
-  echo "ERROR: el README del candidato delata el reto" >&2; exit 1
-fi
+# Comprobacion final: nada reservado al evaluador/desarrolladores debe estar en la semilla (ver check-seed.sh)
+"$HERE/scripts/check-seed.sh" "$OUT/seed"
 
 cp "$HERE/Dockerfile" "$HERE/extensions.txt" "$OUT/"
 cp -R "$HERE/scripts" "$HERE/config" "$HERE/startup" "$OUT/"

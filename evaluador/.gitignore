@@ -1,0 +1,5 @@
+video/node_modules/
+video/.cache/
+video/test-results/
+# Material de trabajo temporal del script de progreso
+.work/
