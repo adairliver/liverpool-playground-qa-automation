@@ -1,0 +1,8 @@
+# Extensiones de lenguaje (Open VSX), versiones fijas. Formato: publisher.name version [targetPlatform]
+# NO agregar extensiones de IA. Tampoco vscjava.vscode-java-pack (incorpora extensiones de IA).
+redhat.java                       1.58.2026101508  linux-x64
+vscjava.vscode-java-debug         0.60.0
+vscjava.vscode-java-test          0.47.0
+vscjava.vscode-maven              0.45.3
+vscjava.vscode-java-dependency    0.27.6
+alexkrechik.cucumberautocomplete  3.0.5

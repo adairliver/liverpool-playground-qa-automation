@@ -68,3 +68,8 @@ El reporte HTML queda en `automation/target/cucumber-report.html`.
 | 3 | `03_seleccion_pedido.feature` | Selección de pedido tras recargar |
 | 4 | `04_reporte.feature` | Reporte en pestaña nueva |
 | 5 | `05_banner_promocional.feature` | Banner promocional intermitente |
+
+## Workstation para el examen en vivo
+
+La imagen de Google Cloud Workstations (Java, Maven, Chrome, extensiones de Java/Gherkin, sin IA ni internet) se arma y
+publica desde [`infra/workstation`](infra/workstation/README.md).

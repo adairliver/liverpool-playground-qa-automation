@@ -1,0 +1,68 @@
+{
+  "chat.disableAIFeatures": true,
+  "chat.commandCenter.enabled": false,
+  "chat.agent.enabled": false,
+  "editor.inlineSuggest.enabled": false,
+  "workbench.enableExperiments": false,
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "none",
+  "security.workspace.trust.enabled": false,
+
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "extensions.ignoreRecommendations": true,
+  "extensions.allowed": {
+    "*": false,
+    "vscode": true,
+    "redhat": true,
+    "vscjava": true,
+    "alexkrechik": true,
+    "google.cloud-workstations": true,
+    "google.cloud-developer-environments-auth": true
+  },
+
+  "editor.quickSuggestions": { "other": "on", "comments": "off", "strings": "on" },
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.formatOnSave": false,
+  "files.autoSave": "afterDelay",
+
+  "java.jdt.ls.java.home": "__JDTLS_JAVA_HOME__",
+  "java.configuration.runtimes": [
+    { "name": "JavaSE-17", "path": "/opt/jdk17", "default": true }
+  ],
+  "java.configuration.maven.userSettings": "/home/user/.m2/settings.xml",
+  "java.configuration.maven.globalSettings": "/opt/maven/conf/settings.xml",
+  "java.import.maven.offline.enabled": true,
+  "java.completion.enabled": true,
+  "java.completion.guessMethodArguments": "insertBestGuessedArguments",
+  "java.autobuild.enabled": true,
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.import.gradle.enabled": false,
+  "java.eclipse.downloadSources": false,
+  "java.maven.downloadSources": false,
+  "java.help.showReleaseNotes": false,
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "maven.executable.path": "/opt/maven/bin/mvn",
+  "java.test.config": { "vmArgs": ["-Dheadless=true"] },
+
+  "cucumberautocomplete.steps": ["automation/src/test/java/**/steps/*.java"],
+  "cucumberautocomplete.syncfeatures": "automation/src/test/resources/features/*.feature",
+  "cucumberautocomplete.strictGherkinCompletion": true,
+  "cucumberautocomplete.smartSnippets": true,
+  "cucumberautocomplete.stepsInvariants": true,
+  "cucumberautocomplete.onTypeFormat": true,
+  "cucumberautocomplete.gherkinDefinitionPart": "(Dado|Cuando|Entonces|Y|Pero|Given|When|Then|And|But)\\(",
+
+  "terminal.integrated.env.linux": {
+    "JAVA_HOME": "/opt/jdk17",
+    "MAVEN_HOME": "/opt/maven",
+    "SE_OFFLINE": "true",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/opt/jdk17/bin:/opt/maven/bin:${env:PATH}"
+  },
+  "git.openRepositoryInParentFolders": "never"
+}
