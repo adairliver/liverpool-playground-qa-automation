@@ -3,6 +3,7 @@ package com.liverpool.playground.pages;
 import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,20 +39,23 @@ public class DashboardPage {
                 .isDisplayed();
     }
 
-    /** Ejercicio 4 (parte 1): abre el reporte en una pestaña nueva. */
+    /** Abre el reporte. */
     public void clickOpenReport() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(openReportLink))
                 .click();
     }
 
-    /** Ejercicio 5: existencia sin lógica dirigida por excepciones (findElements + lista vacía). */
+    /** Indica si el banner promocional está presente. */
     public boolean isPromoBannerPresent() {
-        List<WebElement> banners = driver.findElements(PROMO_BANNER);
-        return !banners.isEmpty();
+        try {
+            return driver.findElement(PROMO_BANNER).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
-    /** Utilidad de sincronización para la prueba (no es parte de ningún ejercicio). */
+    /** Utilidad de sincronización para la prueba. */
     public void waitUntilPromoBanner(boolean shouldBePresent) {
         new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(15))

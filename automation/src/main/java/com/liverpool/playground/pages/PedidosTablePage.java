@@ -20,10 +20,10 @@ public class PedidosTablePage {
         waitForRow("1001");
     }
 
-    /** Ejercicio 3: la fila se localiza DESPUÉS del refresh() para evitar StaleElementReferenceException. */
+    /** Recarga la página y selecciona el pedido indicado. */
     public void clickRowAfterRefresh(String pedidoId) {
-        driver.navigate().refresh();
         WebElement rowItem = waitForRow(pedidoId);
+        driver.navigate().refresh();
         rowItem.click();
     }
 

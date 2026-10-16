@@ -43,11 +43,14 @@ public class PedidoFormPage {
         cantidadInput.sendKeys(cantidad);
     }
 
-    /** Ejercicio 1: espera explícita (WebDriverWait + ExpectedConditions), nunca Thread.sleep. */
+    /** Envía el formulario. */
     public void clickSubmitButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(submitButton))
-                .click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        submitButton.click();
     }
 
     public String confirmationMessage() {
