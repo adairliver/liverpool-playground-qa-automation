@@ -10,7 +10,7 @@ import io.cucumber.java.es.Entonces;
 
 public class PedidoFormSteps {
 
-    /** Tope para detectar pausas fijas: el botón se habilita a los ~3s; con Thread.sleep(5000) se excede. */
+    /** Tiempo máximo aceptable (ms) entre abrir el formulario y hacer clic en enviar. */
     private static final long MAX_MILLIS_HASTA_CLIC = 4500;
 
     private final ScenarioContext context;
@@ -46,9 +46,9 @@ public class PedidoFormSteps {
     }
 
     @Entonces("el envío se realizó en un tiempo razonable")
-    public void sinPausasFijas() {
+    public void envioEnTiempoRazonable() {
         assertThat(duracion)
-                .as("Tiempo hasta el clic (ms); una pausa fija de 5s lo excedería")
+                .as("Tiempo hasta el clic (ms)")
                 .isLessThan(MAX_MILLIS_HASTA_CLIC);
     }
 }

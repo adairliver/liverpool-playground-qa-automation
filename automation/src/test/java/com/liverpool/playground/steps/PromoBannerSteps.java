@@ -45,7 +45,7 @@ public class PromoBannerSteps {
                 .map(Throwable::getClass)
                 .collect(Collectors.toList());
         assertThat(noSuchElement)
-                .as("La validación de existencia no debe depender de excepciones")
+                .as("NoSuchElementException registradas durante la consulta")
                 .isEmpty();
     }
 }

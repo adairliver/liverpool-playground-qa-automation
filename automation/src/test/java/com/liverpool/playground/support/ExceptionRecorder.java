@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import org.openqa.selenium.support.events.WebDriverListener;
 
-/** Registra las excepciones que lanza WebDriver, para verificar que no se usen como control de flujo. */
+/** Registra las excepciones que lanza WebDriver durante la prueba. */
 public class ExceptionRecorder implements WebDriverListener {
 
     private final List<Throwable> errors = Collections.synchronizedList(new ArrayList<>());
