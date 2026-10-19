@@ -81,8 +81,26 @@ Al terminar la sesión del examen:
 ./scripts/gcp-teardown.sh        # pide confirmar el nombre del proyecto
 ```
 
-## Cambiar de rama (development → challenge-30mins)
+## Dos workstations: una por rama
 
-La imagen toma el código con `git archive` de la rama indicada. Para la fase del reto:
-`BRANCH=challenge-30mins ./scripts/gcp-setup.sh image && ./scripts/gcp-setup.sh config`, y **recrear la workstation**
-(el disco persistente conserva `/home/user/qa-challenge` si ya existía; bórrala o usa una nueva por candidato).
+La imagen toma el código con `git archive` de la rama indicada. Se mantienen **dos workstations en el mismo clúster** (misma red,
+firewall y cuenta de servicio), cada una con su imagen y su configuración:
+
+| | Rama | Imagen | Configuración | Workstation |
+|---|------|--------|---------------|-------------|
+| Línea base (todo en verde) | `development` | `qa-workstation` | `qa-challenge-config` | `qa-challenge-ws` |
+| Reto (5 errores sembrados) | `challenge-30mins` | `qa-workstation-challenge` | `qa-challenge-config-reto` | `qa-challenge-ws-reto` |
+
+```bash
+cd infra/workstation
+# Línea base
+BRANCH=development ./scripts/gcp-setup.sh image && ./scripts/gcp-setup.sh config
+# Reto (nombres propios; el clúster, la red y la cuenta de servicio se reutilizan)
+export BRANCH=challenge-30mins IMAGE_NAME=qa-workstation-challenge CONFIG=qa-challenge-config-reto WORKSTATION=qa-challenge-ws-reto
+./scripts/gcp-setup.sh image && ./scripts/gcp-setup.sh config && ./scripts/gcp-setup.sh workstation
+./scripts/grant-access.sh CORREO     # usa las variables CONFIG y WORKSTATION exportadas
+```
+
+Para dos construcciones a la vez usa `BUILD_DIR` distinto en cada una. Al actualizar una configuración, la workstation toma la
+imagen nueva al **reiniciarse** (el disco persistente conserva `/home/user/qa-challenge` si ya existía). Para un candidato nuevo,
+bórrala y créala de nuevo (`gcloud workstations delete` + `./scripts/gcp-setup.sh workstation`) o usa una workstation por candidato.

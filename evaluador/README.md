@@ -496,9 +496,12 @@ Sugerencia de lectura global: 5/5 sin pistas y en tiempo → fuerte · 4/5 con �
 ## 9. Operación del examen (checklist)
 
 **Antes** (tiempo sugerido: ~5-6 min por ejercicio; si resulta justo, deja resuelto el 5 aplicando `soluciones/ej5.patch` y usa `--ejercicios 1,2,3,4`)
-1. Imagen construida con la rama del reto: `cd infra/workstation && BRANCH=challenge-30mins ./scripts/gcp-setup.sh image && ./scripts/gcp-setup.sh config`.
-2. Workstation **nueva** (el disco persistente conserva `/home/user/qa-challenge` si ya existía) y arrancada.
-3. Acceso: `./scripts/grant-access.sh CANDIDATO` y `./scripts/grant-access.sh EVALUADOR`.
+1. Existen dos workstations (ver `infra/workstation/README.md`): `qa-challenge-ws` (rama `development`, todo en verde) y
+   **`qa-challenge-ws-reto`** (rama `challenge-30mins`, con los 5 errores), que es la del examen. Si cambiaste el reto, reconstruye su
+   imagen: `cd infra/workstation && BRANCH=challenge-30mins IMAGE_NAME=qa-workstation-challenge CONFIG=qa-challenge-config-reto WORKSTATION=qa-challenge-ws-reto ./scripts/gcp-setup.sh image`
+   (y `config` con las mismas variables).
+2. Workstation **nueva** por candidato (el disco persistente conserva `/home/user/qa-challenge` si ya existía) y arrancada.
+3. Acceso (con `CONFIG=qa-challenge-config-reto WORKSTATION=qa-challenge-ws-reto` exportadas): `./scripts/grant-access.sh CANDIDATO` y `./scripts/grant-access.sh EVALUADOR`.
 4. Comprueba que `mvn test` falla 5 de 6 (ver `salidas/`) y que `progreso.py` marca 0/5.
 5. Ten a mano `media/estado-al-100.mp4` por si quieres mostrar el resultado final esperado.
 
