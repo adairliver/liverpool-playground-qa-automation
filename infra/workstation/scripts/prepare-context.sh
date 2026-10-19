@@ -31,13 +31,18 @@ fi
 
 # README propio del candidato (el del repositorio menciona el banco de errores y la rama del reto).
 # Los bloques <!--VIDEO--> solo se conservan si la imagen lleva el video; <!--SINVIDEO--> solo si no lo lleva.
-python3 - "$HERE/config/candidate-README.md" "$OUT/seed/README.md" "$WITH_VIDEO" <<'PY'
+python3 - "$HERE/config/candidate-README.md" "$OUT/seed/README.md" "$WITH_VIDEO" "${PROGRESS_BUCKET:+1}" <<'PY'
 import re, sys
 src, dst, con = sys.argv[1], sys.argv[2], sys.argv[3] == "1"
+con_agente = sys.argv[4] == "1"   # el aviso <!--EVAL--> solo va si la imagen lleva el agente de progreso
 t = open(src, encoding="utf-8").read()
 keep, drop = ("VIDEO", "SINVIDEO") if con else ("SINVIDEO", "VIDEO")
 t = re.sub(rf"<!--{drop}-->.*?<!--/{drop}-->\n", "", t, flags=re.S)
 t = re.sub(rf"<!--/?{keep}-->\n", "", t)
+if con_agente:
+    t = re.sub(r"<!--/?EVAL-->\n", "", t)
+else:
+    t = re.sub(r"<!--EVAL-->.*?<!--/EVAL-->\n", "", t, flags=re.S)
 assert "<!--" not in t, "quedaron marcadores sin resolver"
 open(dst, "w", encoding="utf-8").write(t)
 PY
@@ -45,6 +50,11 @@ PY
 "$HERE/scripts/check-seed.sh" "$OUT/seed"
 
 cp "$HERE/Dockerfile" "$HERE/extensions.txt" "$OUT/"
-cp -R "$HERE/scripts" "$HERE/config" "$HERE/startup" "$HERE/extension" "$OUT/"
+cp -R "$HERE/scripts" "$HERE/config" "$HERE/startup" "$HERE/extension" "$HERE/agent" "$OUT/"
+# Agente de progreso: solo se activa si se indica PROGRESS_BUCKET (la imagen de development no lo lleva).
+if [ -n "${PROGRESS_BUCKET:-}" ]; then
+  printf '%s\n' "$PROGRESS_BUCKET" > "$OUT/agent/bucket"
+  echo "Agente de progreso activado hacia gs://$PROGRESS_BUCKET"
+fi
 echo "Contexto listo en $OUT (rama $BRANCH, commit $(git -C "$REPO" rev-parse --short "$BRANCH"))"
 echo "Archivos en la semilla:"; (cd "$OUT/seed" && find . -type f | sort | head -80)

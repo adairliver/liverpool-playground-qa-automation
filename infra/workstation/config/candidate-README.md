@@ -106,4 +106,8 @@ Los comandos de `mvn` se ejecutan desde la carpeta `automation`.
 - Puedes usar el autocompletado del IDE (Java y Gherkin).
 - No cambies la app (`app-web`): el problema está en la automatización.
 - No modifiques los escenarios (`.feature`) ni los *steps* para "hacer pasar" las pruebas.
+<!--EVAL-->
+- Para que quien lleva el examen pueda seguir tu avance, el código fuente de este proyecto (sin `node_modules` ni `target`)
+  se copia automáticamente cada minuto a un almacenamiento privado al que tú no tienes acceso.
+<!--/EVAL-->
 - Tienes 30 minutos. ¡Éxito!

@@ -9,6 +9,7 @@
 |---------|----------------|
 | `README.md` | Esta guía. |
 | `progreso.py` | Mide en vivo cuántos ejercicios lleva resueltos el candidato (0/5 … 5/5). |
+| `monitor.py` | Mide **todas** las workstations del reto a la vez, desde tu máquina (ver «Monitor automático»). |
 | `soluciones/ej1.patch … ej5.patch` | Solución de referencia de cada ejercicio (independientes entre sí). |
 | `verificar-soluciones.sh` | Prueba que los parches funcionan sobre la rama sembrada (úsalo si cambias algo). |
 | `salidas/ejN-fallo.txt` | Salida **real** de cada fallo sembrado. |
@@ -429,6 +430,48 @@ EVALUACION  QA Automation Senior            tiempo: 18:42 / 30:00
 
 Para revisar después en tu laptop: exporta el trabajo del candidato (`git diff` sobre el commit inicial) y corre el script con
 `--trabajo` sobre esa copia.
+
+---
+
+### Monitor automático de todas las workstations: `monitor.py`
+
+Las workstations no admiten SSH ni TCP (solo navegador) y `progreso.py` lleva las respuestas, así que **no se envía nada a las
+workstations**: el flujo va al revés.
+
+```text
+workstation del candidato                         tu máquina
+  agente (root, cada ~60 s)                         python3 evaluador/monitor.py --vigilar 120
+  empaqueta /home/user/qa-challenge  ──►  bucket  ──►  descarga el último paquete de cada workstation en marcha
+  (sin node_modules/target; con .git)   (solo crear)    y le aplica progreso.py sobre una copia
+```
+
+- El agente vive en la imagen del reto (`infra/workstation/agent/`) y solo se activa si la imagen se construyó con
+  `PROGRESS_BUCKET=...` (la de `development` no lo lleva). Sube solo cuando hay cambios; registro en `/var/log/qa-progress.log`.
+- La cuenta de servicio de las workstations tiene `roles/storage.objectCreator` sobre el bucket: **puede crear objetos, pero no
+  listar, leer ni borrar**; el candidato no puede ver lo subido (ni lo de otros). El bucket borra los paquetes a los 7 días.
+- El README del candidato le avisa de que su código se copia para el seguimiento.
+- Requisitos en tu máquina: `gcloud` autenticado, Java 17 + Maven, y `npm install` hecho en `app-web/` (se reutiliza ese
+  `node_modules`). Se evalúa de una workstation a la vez (puerto 5299).
+
+```bash
+python3 evaluador/monitor.py --reiniciar            # al empezar el examen: pone a cero el cronómetro de cada candidato
+python3 evaluador/monitor.py --vigilar 120 --detalle   # tablero que se refresca cada 2 min
+python3 evaluador/monitor.py --solo qa-ws-fjnavam   # una sola workstation
+```
+
+Salida: una fila por workstation con el estado de cada ejercicio (`OK` resuelto · `--` falla · `~~` pasa sin la técnica ·
+`!!` no compila), la edad del último paquete y el progreso `n/5`. Las detenidas aparecen como tales. El retraso máximo es de
+~1 min (subida) más lo que tarde la evaluación (~20-30 s por workstation).
+
+Para activar el agente en una imagen nueva (rama del reto) y relanzar las workstations:
+
+```bash
+cd infra/workstation
+env BRANCH=challenge-30mins IMAGE_NAME=qa-workstation-challenge PROGRESS_BUCKET=crp-poc-it-hackathon-1-qa-progreso \
+    BUILD_DIR=/tmp/qa-build-ch ./scripts/gcp-setup.sh image
+```
+
+Las workstations ya existentes toman la imagen nueva al **detenerse y volver a iniciarse** (su disco y el trabajo se conservan).
 
 ---
 
