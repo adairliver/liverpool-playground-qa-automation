@@ -5,7 +5,8 @@
   "description": "Genera el video de referencia (estado al 100%) de la app de pedidos. Solo para el evaluador.",
   "type": "module",
   "scripts": {
-    "grabar": "node grabar.mjs"
+    "grabar": "node grabar.mjs",
+    "grabar:candidato": "MODO=candidato node grabar.mjs"
   },
   "devDependencies": {
     "ffmpeg-static": "^5.2.0",
