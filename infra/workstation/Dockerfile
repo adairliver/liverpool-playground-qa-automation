@@ -83,7 +83,12 @@ RUN set -eux; \
     sed -i "s|__JDTLS_JAVA_HOME__|$JH|" /opt/qa-seed/machine-settings.json; \
     python3 -c "import json; json.load(open('/opt/qa-seed/machine-settings.json'))"
 COPY startup/105_qa-bootstrap.sh /etc/workstation-startup.d/105_qa-bootstrap.sh
-RUN chmod +x /etc/workstation-startup.d/105_qa-bootstrap.sh \
+# Agente de progreso (solo se activa si la imagen trae agent/bucket; ver startup/106_qa-progress.sh)
+COPY agent/ /opt/qa-seed/agent/
+COPY startup/106_qa-progress.sh /etc/workstation-startup.d/106_qa-progress.sh
+RUN python3 -m py_compile /opt/qa-seed/agent/qa-progress-agent.py \
+ && chmod +x /etc/workstation-startup.d/106_qa-progress.sh \
+ && chmod +x /etc/workstation-startup.d/105_qa-bootstrap.sh \
  && sed -i 's|--port=${EDITOR_PORT}|--default-folder=/home/user/qa-challenge --port=${EDITOR_PORT}|' /etc/workstation-startup.d/110_start-code-oss.sh \
  && grep -q -- '--default-folder=/home/user/qa-challenge' /etc/workstation-startup.d/110_start-code-oss.sh
 
