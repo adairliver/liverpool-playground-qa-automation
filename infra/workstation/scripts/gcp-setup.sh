@@ -22,6 +22,10 @@ DISK_GB="${DISK_GB:-50}"
 IDLE_SECONDS="${IDLE_SECONDS:-1200}"       # apaga tras 20 min de inactividad
 RUNNING_SECONDS="${RUNNING_SECONDS:-7200}"  # tope de 2 h por sesion
 BRANCH="${BRANCH:-development}"
+# Alcances OAuth de la VM. Por defecto solo lectura de Storage (imagen + logs). La config del reto con agente de progreso
+# necesita escribir en el bucket: SA_SCOPES=https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write
+# (el IAM sigue limitando a esa cuenta a CREAR objetos en ese unico bucket).
+SA_SCOPES="${SA_SCOPES:-https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write}"
 STEP="${1:-all}"
 
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
@@ -104,10 +108,10 @@ config() {
       --container-custom-image "$IMAGE_URI" \
       --idle-timeout "$IDLE_SECONDS" --running-timeout "$RUNNING_SECONDS" \
       --disable-public-ip-addresses --disable-tcp-connections \
-      --service-account "$WS_SA" --pool-size 0
+      --service-account "$WS_SA" --service-account-scopes "$SA_SCOPES" --pool-size 0
   else
     g workstations configs update "$CONFIG" --cluster "$CLUSTER" --region "$REGION" \
-      --container-custom-image "$IMAGE_URI" --service-account "$WS_SA"
+      --container-custom-image "$IMAGE_URI" --service-account "$WS_SA" --service-account-scopes "$SA_SCOPES"
   fi
 }
 
