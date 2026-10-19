@@ -12,6 +12,20 @@ todo viene preinstalado y **no hay IA ni internet**.
 | Extensiones | Red Hat Java, Debugger, Test Runner, Maven y Project Manager for Java, Cucumber (Gherkin) autocomplete |
 | Proyecto | `/home/user/qa-challenge` (repo git de un solo commit, sin historial ni respuestas) |
 
+### Cómo queda el IDE al abrir
+
+Al abrir la URL de la workstation el candidato ve el proyecto `qa-challenge` ya abierto, con **tema oscuro**, **sin la pestaña
+Welcome** y la **terminal desplegada** (`bash` en `/home/user/qa-challenge`, con Java 17 y Maven listos). Aplica igual a las dos
+ramas porque lo pone la imagen, no el repositorio:
+
+- [`extension/qa-startup`](extension/qa-startup): extensión propia (sin red ni telemetría) instalada como *built-in*. Al terminar de
+  iniciar fija el tema oscuro (solo si el usuario no eligió otro), cierra Welcome y abre la terminal. Se usa una extensión porque en el
+  IDE web los ajustes de usuario viven en el navegador y `configurationDefaults` de `product.json` no llega al cliente.
+- `startup/105_qa-bootstrap.sh` escribe `.vscode/settings.json` del proyecto con `java.dependency.enableDependencyCheckup: false`, para
+  que las extensiones de Java no ofrezcan instalar la extensión de Copilot para "modernizar" el proyecto (`.vscode/` está en `.gitignore`).
+
+`scripts/test-image-local.sh` comprueba ambas piezas.
+
 Versiones de extensiones en [`extensions.txt`](extensions.txt) (descargadas de Open VSX y desempaquetadas como *built-in*
 en `/opt/code-oss/extensions`, así sobreviven al disco persistente y no se pueden desinstalar).
 

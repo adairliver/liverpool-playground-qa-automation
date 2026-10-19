@@ -70,6 +70,12 @@ RUN set -eux; \
     python3 /opt/qa-seed/scripts/strip-product-json.py /opt/code-oss/product.json
 RUN bash /opt/qa-seed/scripts/verify-no-ai.sh /opt/code-oss/extensions
 
+# --- Extension propia (sin red ni telemetria): tema oscuro, cierra la pestana Welcome y despliega la terminal al abrir.
+# Va despues de las capas pesadas para conservar su cache; se vuelve a verificar que no haya nada de IA.
+COPY extension/qa-startup/ /opt/code-oss/extensions/qachallenge.qa-startup-1.0.0/
+RUN python3 -c "import json; json.load(open('/opt/code-oss/extensions/qachallenge.qa-startup-1.0.0/package.json'))" \
+ && bash /opt/qa-seed/scripts/verify-no-ai.sh /opt/code-oss/extensions
+
 # --- Ajustes del IDE y arranque (el JDK del servidor de lenguaje es el de la imagen base)
 COPY config/machine-settings.json /opt/qa-seed/machine-settings.json
 RUN set -eux; \

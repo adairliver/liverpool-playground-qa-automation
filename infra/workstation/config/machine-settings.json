@@ -19,6 +19,7 @@
     "redhat": true,
     "vscjava": true,
     "alexkrechik": true,
+    "qachallenge": true,
     "google.cloud-workstations": true,
     "google.cloud-developer-environments-auth": true
   },
@@ -44,6 +45,7 @@
   "java.eclipse.downloadSources": false,
   "java.maven.downloadSources": false,
   "java.help.showReleaseNotes": false,
+  "java.dependency.enableDependencyCheckup": false,
   "java.configuration.checkProjectSettingsExclusions": false,
   "maven.executable.path": "/opt/maven/bin/mvn",
   "java.test.config": { "vmArgs": ["-Dheadless=true"] },

@@ -27,6 +27,21 @@ chown -R user:user /home/user/.codeoss-cloudworkstations 2>/dev/null || true
 install -m 0644 -o user -g user /opt/qa-seed/machine-settings.json "$DATA/Machine/settings.json"
 install -m 0644 -o user -g user /opt/maven/conf/settings.xml /home/user/.m2/settings.xml
 
+# Ajustes del proyecto: sin avisos de "modernizacion con Copilot" de las extensiones de Java (cero IA). Se mezclan sin
+# pisar lo que el candidato haya cambiado; .vscode/ esta en .gitignore, asi que no ensucia el repositorio.
+install -d -o user -g user "$WS/.vscode"
+python3 - "$WS/.vscode/settings.json" <<'PY'
+import json, os, sys
+p = sys.argv[1]
+try:
+    cur = json.load(open(p)) if os.path.exists(p) else {}
+except Exception:
+    cur = {}
+cur.setdefault("java.dependency.enableDependencyCheckup", False)
+json.dump(cur, open(p, "w"), indent=2)
+PY
+chown user:user "$WS/.vscode/settings.json"
+
 # Git del candidato (solo para poder hacer commit local)
 runuser user -c "git config --global user.name 'Candidato QA'; git config --global user.email 'candidato@example.com'; git config --global --add safe.directory '$WS'"
 
