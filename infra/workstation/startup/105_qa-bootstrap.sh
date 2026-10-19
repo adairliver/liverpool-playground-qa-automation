@@ -42,6 +42,13 @@ json.dump(cur, open(p, "w"), indent=2)
 PY
 chown user:user "$WS/.vscode/settings.json"
 
+# Validador de avance del candidato: se sobrescribe en cada arranque para asegurar que llega a las workstations
+# ya existentes (que no re-copian la semilla). El candidato no debe modificarlo; si lo cambia, el proximo reinicio lo
+# restituye. Si el archivo no esta en la imagen (p. ej. imagenes antiguas), este bloque no hace nada.
+if [ -f "$SEED/validar_reto.sh" ]; then
+  install -o user -g user -m 0755 "$SEED/validar_reto.sh" "$WS/validar_reto.sh"
+fi
+
 # Git del candidato (solo para poder hacer commit local)
 runuser user -c "git config --global user.name 'Candidato QA'; git config --global user.email 'candidato@example.com'; git config --global --add safe.directory '$WS'"
 
