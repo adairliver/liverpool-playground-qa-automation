@@ -19,6 +19,6 @@ cp "$HERE/config/candidate-README.md" "$OUT/seed/README.md"
 "$HERE/scripts/check-seed.sh" "$OUT/seed"
 
 cp "$HERE/Dockerfile" "$HERE/extensions.txt" "$OUT/"
-cp -R "$HERE/scripts" "$HERE/config" "$HERE/startup" "$OUT/"
+cp -R "$HERE/scripts" "$HERE/config" "$HERE/startup" "$HERE/extension" "$OUT/"
 echo "Contexto listo en $OUT (rama $BRANCH, commit $(git -C "$REPO" rev-parse --short "$BRANCH"))"
 echo "Archivos en la semilla:"; (cd "$OUT/seed" && find . -type f | sort | head -80)

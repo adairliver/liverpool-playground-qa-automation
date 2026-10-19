@@ -51,6 +51,9 @@ docker exec -u user $C bash -lc 'cd /home/user/qa-challenge && [ "$(git rev-list
   && ok "repo del reto con un solo commit y limpio" || bad "repo del reto"
 docker exec -u user $C bash -lc 'python3 -c "import json;d=json.load(open(\"/home/user/.codeoss-cloudworkstations/data/Machine/settings.json\"));assert d[\"chat.disableAIFeatures\"] is True and d[\"extensions.allowed\"][\"*\"] is False"' \
   && ok "ajustes de maquina aplicados (IA deshabilitada, extensiones restringidas)" || bad "ajustes de maquina"
+docker exec $C bash -c 'ls -d /opt/code-oss/extensions/qachallenge.qa-startup-*/extension.js >/dev/null' && ok "extension de inicio (tema oscuro, terminal desplegada) instalada" || bad "falta la extension de inicio"
+docker exec -u user $C bash -lc 'python3 -c "import json;d=json.load(open(\"/home/user/qa-challenge/.vscode/settings.json\"));assert d[\"java.dependency.enableDependencyCheckup\"] is False"' \
+  && ok "sin avisos de modernizacion con Copilot (ajustes del proyecto)" || bad "ajustes del proyecto sin desactivar el aviso de Copilot"
 docker exec -d -u user $C bash -lc 'google-chrome --headless=new --no-sandbox --disable-gpu --remote-debugging-port=9333 "http://localhost:80/?folder=/home/user/qa-challenge" >/tmp/chrome-ide.log 2>&1'
 echo "   (esperando a que el IDE cargue el proyecto Java, ~2 min)"; sleep 120
 LOG='ls -d /home/user/.codeoss-cloudworkstations/data/logs/*/ | head -1'

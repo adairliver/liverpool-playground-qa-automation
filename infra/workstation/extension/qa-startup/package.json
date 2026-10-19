@@ -1,0 +1,12 @@
+{
+  "name": "qa-startup",
+  "displayName": "QA Challenge - Inicio",
+  "description": "Deja el IDE listo al abrir: tema oscuro, sin pestana de bienvenida y terminal desplegada.",
+  "version": "1.0.0",
+  "publisher": "qachallenge",
+  "engines": { "vscode": "^1.80.0" },
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "extensionKind": ["workspace"],
+  "categories": ["Other"]
+}
