@@ -97,7 +97,7 @@ Los comandos de `mvn` se ejecutan desde la carpeta `automation`.
 
 1. Lee el **mensaje** del error y la **primera línea del stack trace** que pertenezca a `com.liverpool.playground`.
 2. Esa línea indica el archivo y el número de línea: ábrelo con `Ctrl/Cmd + clic`.
-3. Compara con el **ticket** y con lo que muestra el video; aplica el cambio más pequeño que lo resuelva.
+3. Compara con el **ticket** y con el comportamiento esperado de la app; aplica el cambio más pequeño que lo resuelva.
 4. Vuelve a ejecutar **solo ese feature** hasta que pase y, al final, la suite completa.
 
 ## Reglas
