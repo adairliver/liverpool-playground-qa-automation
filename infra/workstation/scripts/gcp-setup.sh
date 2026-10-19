@@ -72,8 +72,9 @@ image() {
   g artifacts repositories describe "$REPO" --location "$REGION" >/dev/null 2>&1 || \
     g artifacts repositories create "$REPO" --repository-format docker --location "$REGION" \
       --description "Imagenes del reto de QA"
-  BRANCH="$BRANCH" "$HERE/scripts/prepare-context.sh" >/dev/null
-  g builds submit "$HERE/.build" --region "$REGION" --tag "$IMAGE_URI" --timeout 3000s \
+  local ctx="${BUILD_DIR:-$HERE/.build}"
+  BRANCH="$BRANCH" OUT="$ctx" "$HERE/scripts/prepare-context.sh" >/dev/null
+  g builds submit "$ctx" --region "$REGION" --tag "$IMAGE_URI" --timeout 3000s \
     --machine-type e2-highcpu-8
 }
 

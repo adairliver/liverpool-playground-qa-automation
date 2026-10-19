@@ -6,7 +6,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 REPO="$(cd "$HERE/../.." && pwd)"
 BRANCH="${BRANCH:-development}"
-OUT="$HERE/.build"
+OUT="${OUT:-$HERE/.build}"   # carpeta de contexto (configurable para construir dos imagenes en paralelo)
 
 rm -rf "$OUT" && mkdir -p "$OUT/seed"
 # Las exclusiones se aplican en git archive para que esos archivos ni siquiera se extraigan.
