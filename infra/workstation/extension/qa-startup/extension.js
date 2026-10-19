@@ -1,4 +1,5 @@
-// Extension integrada (sin red, sin telemetria) que prepara el IDE web al abrir el proyecto del reto.
+// Extension integrada (sin red, sin telemetria) que prepara el IDE web al abrir el proyecto del reto:
+// tema oscuro, sin Welcome, terminal desplegada y, si existe, el video del estado esperado como primera pestana.
 // Los ajustes de usuario del IDE web viven en el navegador; por eso se aplican desde aqui en vez de un archivo del servidor.
 const vscode = require('vscode');
 
@@ -42,10 +43,30 @@ async function abrirTerminal() {
   }
 }
 
+// Si el proyecto trae el video del estado esperado (imagen del reto), lo abre como PRIMERA pestana y deja el README
+// al lado. Solo si no hay otras pestanas abiertas: si el candidato recarga y el IDE restaura su trabajo, no se toca nada.
+async function abrirReferencia() {
+  const carpetas = vscode.workspace.workspaceFolders;
+  if (!carpetas || carpetas.length === 0) return;
+  const raiz = carpetas[0].uri;
+  const video = vscode.Uri.joinPath(raiz, 'referencia', 'estado-esperado.mp4');
+  try { await vscode.workspace.fs.stat(video); } catch (e) { return; } // imagen sin video: nada que abrir
+  await esperar(1500);
+  const abiertas = vscode.window.tabGroups.all.reduce((n, g) => n + g.tabs.length, 0);
+  if (abiertas > 0) return;
+  try {
+    await vscode.commands.executeCommand('vscode.open', video, { preview: false });
+    // La vista previa del README se abre como segunda pestana y toma el foco; se vuelve a activar el video.
+    await vscode.commands.executeCommand('markdown.showPreview', vscode.Uri.joinPath(raiz, 'README.md'));
+    await vscode.commands.executeCommand('vscode.open', video, { preview: false });
+  } catch (e) { /* no critico */ }
+}
+
 exports.activate = async function activate() {
   await aplicarAjustes();
   await cerrarBienvenida();
   await abrirTerminal();
   await cerrarBienvenida();
+  await abrirReferencia();
 };
 exports.deactivate = function deactivate() {};

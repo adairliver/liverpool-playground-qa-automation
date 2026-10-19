@@ -1,6 +1,6 @@
 # Guía del evaluador — Reto de QA Automation Senior (30 min)
 
-> **Uso exclusivo del evaluador. No compartir con el candidato.** Esta carpeta (`evaluador/`) nunca entra a la imagen
+> **Uso exclusivo del evaluador. No compartir con el candidato** (el video `media/estado-al-100.mp4` explica las soluciones en sus subtítulos; el del candidato es `media-candidato/`). Esta carpeta (`evaluador/`) nunca entra a la imagen
 > de la workstation del candidato; la construcción de la imagen falla si se cuela (`infra/workstation/scripts/check-seed.sh`).
 
 ## Contenido
@@ -14,6 +14,7 @@
 | `salidas/ejN-fallo.txt` | Salida **real** de cada fallo sembrado. |
 | `media/estado-al-100.mp4` | Video (71 s, con subtítulos) de la app y la suite funcionando al 100 %. |
 | `media/*.png` | Capturas del estado final esperado. |
+| `media-candidato/estado-esperado.mp4` | Mismo recorrido con subtítulos **neutros** (sin técnicas ni soluciones). Es el que ve el candidato: la imagen del reto lo incluye como `referencia/estado-esperado.mp4` y el IDE lo abre solo como primera pestaña. |
 | `video/` | Generador del video (Playwright). Solo para regenerarlo. |
 
 ---
@@ -512,4 +513,4 @@ la infraestructura si no habrá más sesiones (`infra/workstation/scripts/gcp-te
 
 **Si cambias algo del reto** — regenera los parches si cambian los Page Objects y ejecuta
 `evaluador/verificar-soluciones.sh` (debe terminar con "Soluciones verificadas.").
-Para regenerar el video: `cd evaluador/video && npm install && npm run grabar`.
+Para regenerar los videos: `cd evaluador/video && npm install && npm run grabar` (evaluador) y `npm run grabar:candidato` (candidato; necesita un reporte de Cucumber en verde en `automation/target`, es decir, correr `mvn test` en `development` antes). Tras regenerar el del candidato, reconstruye la imagen del reto.
