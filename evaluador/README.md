@@ -449,6 +449,9 @@ workstation del candidato                         tu máquina
   `PROGRESS_BUCKET=...` (la de `development` no lo lleva). Sube solo cuando hay cambios; registro en `/var/log/qa-progress.log`.
 - La cuenta de servicio de las workstations tiene `roles/storage.objectCreator` sobre el bucket: **puede crear objetos, pero no
   listar, leer ni borrar**; el candidato no puede ver lo subido (ni lo de otros). El bucket borra los paquetes a los 7 días.
+- La config del reto debe tener el alcance OAuth `devstorage.read_write` (con `read_only` Google rechaza la escritura aunque el
+  IAM la permita): `SA_SCOPES=https://www.googleapis.com/auth/devstorage.read_write,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write`
+  al ejecutar `gcp-setup.sh config`. Un cambio de alcances solo aplica al **detener e iniciar** cada workstation.
 - El README del candidato le avisa de que su código se copia para el seguimiento.
 - Requisitos en tu máquina: `gcloud` autenticado, Java 17 + Maven, y `npm install` hecho en `app-web/` (se reutiliza ese
   `node_modules`). Se evalúa de una workstation a la vez (puerto 5299).
