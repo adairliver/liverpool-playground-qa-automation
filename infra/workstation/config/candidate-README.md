@@ -77,6 +77,8 @@ Los comandos de `mvn` se ejecutan desde la carpeta `automation`.
 
 | Para… | Comando |
 |-------|---------|
+| **Ver tu avance en porcentaje** (ejecuta la suite y resume por ejercicio) | `./validar_reto.sh` (desde la raíz del proyecto) |
+| Ver tu avance de un solo ejercicio | `./validar_reto.sh --filtro "parte del nombre"` |
 | Ejecutar toda la suite | `mvn test` |
 | Ejecutar un solo feature | `mvn test -Dcucumber.features=src/test/resources/features/02_login.feature` |
 | Ejecutar un solo escenario por nombre (patrón regex; los demás salen como *Skipped*) | `mvn test -Dcucumber.filter.name=".*oculto.*"` |
